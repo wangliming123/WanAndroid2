@@ -1,0 +1,3 @@
+include ':baseLib'
+include ':app'
+rootProject.name = "WanAndroid2"

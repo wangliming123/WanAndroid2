@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="MineViewModel"
+            type="com.wlm.wanandroid2.viewmodel.MineViewModel" />
+
+        <variable
+            name="MineClick"
+            type="com.wlm.wanandroid2.ui.fragment.MineFragment.Click" />
+
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_bg"
+        android:orientation="vertical">
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/mine_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:title="@string/str_mine"
+            app:titleTextColor="@color/white"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+        <com.wlm.baselib.ui.view.LineTabButton
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            app:button_icon="@mipmap/ic_history"
+            android:onClick="@{()->MineClick.history()}"
+            app:button_text="@string/str_history"/>
+
+
+        <com.wlm.baselib.ui.view.LineTabButton
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            android:layout_marginTop="@dimen/dp8"
+            app:button_icon="@mipmap/ic_collect"
+            android:onClick="@{()->MineClick.myCollect()}"
+            app:button_text="@string/str_my_collect"/>
+
+
+        <com.wlm.baselib.ui.view.LineTabButton
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            android:layout_marginTop="@dimen/dp8"
+            app:button_icon="@mipmap/ic_share"
+            android:onClick="@{()->MineClick.myShare()}"
+            app:button_text="@string/str_my_share"/>
+
+        <com.wlm.baselib.ui.view.LineTabButton
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            android:layout_marginTop="@dimen/dp8"
+            app:button_icon="@mipmap/ic_todo"
+            android:onClick="@{()->MineClick.todo()}"
+            app:button_text="@string/str_todo"/>
+
+        <com.wlm.baselib.ui.view.LineTabButton
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            android:layout_marginTop="@dimen/dp8"
+            app:button_icon="@mipmap/ic_about"
+            android:onClick="@{()->MineClick.about()}"
+            app:button_text="@string/str_about"/>
+
+
+        <com.wlm.baselib.ui.view.LineTabButton
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            android:layout_marginTop="@dimen/dp8"
+            app:button_icon="@mipmap/ic_logout"
+            android:onClick="@{()->MineClick.logout()}"
+            app:button_text="@string/str_logout"/>
+    </LinearLayout>
+</layout>

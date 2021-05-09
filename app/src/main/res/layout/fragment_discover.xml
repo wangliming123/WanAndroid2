@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="DiscoverViewModel"
+            type="com.wlm.wanandroid2.viewmodel.DiscoverViewModel" />
+        <variable
+            name="DiscoverClick"
+            type="com.wlm.wanandroid2.ui.fragment.DiscoverFragment.Click" />
+
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_bg"
+        android:orientation="vertical">
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/discover_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:title="@string/str_discover"
+            app:titleTextColor="@color/white"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+
+        <com.wlm.baselib.ui.view.LineTabButton
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            android:onClick="@{()->DiscoverClick.square()}"
+            app:button_icon="@drawable/ic_square"
+            app:button_text="@string/str_square"/>
+
+
+        <com.wlm.baselib.ui.view.LineTabButton
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            android:layout_marginTop="@dimen/dp8"
+            android:onClick="@{()->DiscoverClick.knowledgeTree()}"
+            app:button_icon="@drawable/ic_knowledge_tree"
+            app:button_text="@string/str_knowledge_tree"/>
+
+
+        <com.wlm.baselib.ui.view.LineTabButton
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            android:layout_marginTop="@dimen/dp8"
+            android:onClick="@{()->DiscoverClick.project()}"
+            app:button_icon="@drawable/ic_project"
+            app:button_text="@string/str_project"/>
+
+
+        <com.wlm.baselib.ui.view.LineTabButton
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            android:layout_marginTop="@dimen/dp8"
+            android:onClick="@{()->DiscoverClick.weChat()}"
+            app:button_icon="@drawable/ic_we_chat"
+            app:button_text="@string/str_wx_article"/>
+
+
+        <com.wlm.baselib.ui.view.LineTabButton
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp50"
+            android:layout_marginTop="@dimen/dp8"
+            android:onClick="@{()->DiscoverClick.navigation()}"
+            app:button_icon="@drawable/ic_navigation"
+            app:button_text="@string/str_navigation"/>
+    </LinearLayout>
+</layout>
