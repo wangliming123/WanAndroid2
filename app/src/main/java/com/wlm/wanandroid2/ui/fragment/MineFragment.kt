@@ -46,7 +46,11 @@ class MineFragment : BaseVMDBFragment<MineViewModel, FragmentMineBinding>() {
         }
 
         fun myShare() {
-            startKtxActivity<MyShareActivity>()
+            if (Constant.isLogin) {
+                startKtxActivity<MyShareActivity>()
+            } else {
+                startKtxActivity<LoginActivity>()
+            }
         }
 
         fun todo() {
