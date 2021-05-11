@@ -42,7 +42,7 @@ class LoginViewModel : BaseViewModel() {
                     val result = LoginRepository.register(username, password, password)
                     executeResponse(result, {
                         result.data?.let {
-                            uiState.value = UiState(false, null, "$username,$password")
+                            uiState.value = UiState(false, null, "$username,$password,${it.id}")
                             LoginRepository.login(username, password)
                         }
                     }, {
