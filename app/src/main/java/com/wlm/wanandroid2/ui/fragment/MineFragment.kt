@@ -11,9 +11,7 @@ import com.wlm.wanandroid2.BR
 import com.wlm.wanandroid2.R
 import com.wlm.wanandroid2.common.Constant
 import com.wlm.wanandroid2.databinding.FragmentMineBinding
-import com.wlm.wanandroid2.ui.activity.CollectActivity
-import com.wlm.wanandroid2.ui.activity.LoginActivity
-import com.wlm.wanandroid2.ui.activity.TodoActivity
+import com.wlm.wanandroid2.ui.activity.*
 import com.wlm.wanandroid2.viewmodel.MineViewModel
 
 class MineFragment : BaseVMDBFragment<MineViewModel, FragmentMineBinding>() {
@@ -36,7 +34,7 @@ class MineFragment : BaseVMDBFragment<MineViewModel, FragmentMineBinding>() {
 
     inner class Click {
         fun history() {
-
+            startKtxActivity<HistoryActivity>()
         }
 
         fun myCollect() {
@@ -48,7 +46,7 @@ class MineFragment : BaseVMDBFragment<MineViewModel, FragmentMineBinding>() {
         }
 
         fun myShare() {
-
+            startKtxActivity<MyShareActivity>()
         }
 
         fun todo() {

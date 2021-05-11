@@ -31,6 +31,8 @@
         <activity android:name=".ui.activity.SquareActivity" />
         <activity android:name=".ui.activity.CollectActivity" />
         <activity android:name=".ui.activity.TodoActivity" />
+        <activity android:name=".ui.activity.MyShareActivity" />
+        <activity android:name=".ui.activity.HistoryActivity" />
     </application>
 
 </manifest>

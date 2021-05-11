@@ -131,5 +131,10 @@ interface ApiService {
         @Field("status") status: Int
     ): HttpResponse<Any>
 
+    @GET("user/lg/private_articles/{page}/json")
+    suspend fun getMyShareList(@Path("page") page: Int): HttpResponse<ShareList>
+
+    @POST("lg/user_article/delete/{id}/json")
+    suspend fun deleteShare(@Path("id") id: Int): HttpResponse<Any>
 
 }

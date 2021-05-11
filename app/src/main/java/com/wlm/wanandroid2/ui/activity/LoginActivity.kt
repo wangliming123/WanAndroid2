@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import com.orhanobut.logger.Logger
 import com.wlm.baselib.ui.BaseVMDBActivity
 import com.wlm.baselib.ui.DataBindingConfig
@@ -12,7 +13,10 @@ import com.wlm.wanandroid2.BR
 import com.wlm.wanandroid2.R
 import com.wlm.wanandroid2.common.Constant
 import com.wlm.wanandroid2.databinding.ActivityLoginBinding
+import com.wlm.wanandroid2.repository.DataBaseRepository
 import com.wlm.wanandroid2.viewmodel.LoginViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class LoginActivity : BaseVMDBActivity<LoginViewModel, ActivityLoginBinding>() {
     override val providerVMClass: Class<LoginViewModel> = LoginViewModel::class.java
@@ -75,6 +79,9 @@ class LoginActivity : BaseVMDBActivity<LoginViewModel, ActivityLoginBinding>() {
                 state.success?.let {
                     Constant.isLogin = true
                     Constant.userString = it
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        DataBaseRepository.historyDao.updateHistoryVisitUser(it.split(",")[2].toInt())
+                    }
                     finish()
                 }
             })

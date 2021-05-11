@@ -20,7 +20,7 @@ class MineViewModel : BaseViewModel() {
                     executeResponse(result, {
                         Constant.isLogin = false
                         Constant.userString = ""
-                        logoutState.value = UiState(true)
+                        logoutState.value = UiState()
                     }, {})
                 }
             )

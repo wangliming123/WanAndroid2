@@ -49,7 +49,7 @@ class ArticleViewHolder(val mBinding: ItemArticleBinding) : RecyclerView.ViewHol
             mBinding.ivCollect.setImageDrawable(ResourcesCompat.getDrawable(context.resources,
                 if (collect) R.drawable.ic_like else R.drawable.ic_like_normal, null))
             itemView.setOnClickListener {
-                context.startKtxActivity<BrowserActivity>(value = BrowserActivity.KEY_URL to link)
+                context.startKtxActivity<BrowserActivity>(value = BrowserActivity.KEY_HISTORY to createHistory())
             }
         }
     }

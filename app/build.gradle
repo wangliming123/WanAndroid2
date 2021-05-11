@@ -12,16 +12,25 @@ android {
         applicationId "com.wlm.wanandroid2"
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "2.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    signingConfigs {
+        signRelease {
+            keyAlias 'wlmdev'
+            keyPassword 'wlm123'
+            storeFile file('E:/workspace/WanAndroid2/wlmSign.jks')
+            storePassword 'wlm123'
+        }
     }
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.signRelease
         }
     }
     compileOptions {
@@ -60,4 +69,7 @@ dependencies {
 
     implementation 'com.hyman:flowlayout-lib:1.1.2'
 
+    //room
+    implementation "androidx.room:room-runtime:2.3.0"
+    kapt "androidx.room:room-compiler:2.3.0"
 }

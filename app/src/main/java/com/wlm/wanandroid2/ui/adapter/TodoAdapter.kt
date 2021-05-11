@@ -60,7 +60,7 @@ class TodoAdapter(private val status: Int = Constant.TODO_STATUS_TODO) :
             }
         }
 
-        holder.itemView.setOnClickListener { view ->
+        holder.itemView.setOnClickListener {
             getItem(position)?.let {
                 itemListener?.invoke(it)
             }

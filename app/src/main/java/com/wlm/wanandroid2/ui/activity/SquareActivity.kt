@@ -74,7 +74,7 @@ class SquareActivity : BaseVMDBActivity<SquareViewModel, ActivitySquareBinding>(
         }
         mBinding.btnShare.setOnClickListener {
             val title = mBinding.etTitle.text.toString()
-            val link = mBinding.etTitle.text.toString()
+            val link = mBinding.etLink.text.toString()
             when{
                 title.isEmpty() -> {
                     mBinding.tvTips.visibility = View.VISIBLE

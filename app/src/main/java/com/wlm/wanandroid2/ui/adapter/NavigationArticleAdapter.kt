@@ -66,7 +66,7 @@ class NavigationArticleViewHolder(val mBinding: LayoutNavigationArticleBinding) 
 
                 setOnTagClickListener { _, position, parent ->
                     val article = articles[position]
-                    parent.context.startKtxActivity<BrowserActivity>(value = BrowserActivity.KEY_URL to article.link)
+                    parent.context.startKtxActivity<BrowserActivity>(value = BrowserActivity.KEY_HISTORY to article.createHistory())
 
                     true
                 }

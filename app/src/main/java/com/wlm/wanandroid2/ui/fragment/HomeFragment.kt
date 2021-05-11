@@ -31,7 +31,7 @@ class HomeFragment : BaseVMDBFragment<HomeViewModel, FragmentHomeBinding>() {
         initRecycler()
 
         mBinding.homeRefresh.run {
-            setColorSchemeColors(Color.BLUE, Color.GREEN)
+            setColorSchemeColors(Color.GREEN, Color.BLUE)
             setOnRefreshListener {
                 isRefreshFromPull = true
                 mViewModel.refresh()

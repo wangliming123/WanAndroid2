@@ -1,6 +1,9 @@
 package com.wlm.wanandroid2.bean
 
+import com.wlm.wanandroid2.common.Constant
+import com.wlm.wanandroid2.db.History
 import java.io.Serializable
+import java.util.*
 
 
 data class User(
@@ -61,7 +64,16 @@ data class Article(
     val zan: Int,
     var isTop: Boolean = false,
     var bannerList: List<BannerData>?
-)
+): Serializable {
+    fun createHistory(): History {
+        val history = History(-1, id, title, link, desc, envelopePic, type, collect, Date().time)
+        val userString = Constant.userString
+        if (userString.isNotEmpty()) {
+            history.visitUserId = userString.split(",")[2].toInt()
+        }
+        return history
+    }
+}
 
 
 data class BannerData(
@@ -73,7 +85,16 @@ data class BannerData(
     val title: String,
     val type: Int,
     val url: String
-)
+): Serializable {
+    fun createHistory(): History {
+        val history = History(-1, id, title, url, desc, imagePath, type, false, Date().time)
+        val userString = Constant.userString
+        if (userString.isNotEmpty()) {
+            history.visitUserId = userString.split(",")[2].toInt()
+        }
+        return history
+    }
+}
 
 
 data class Knowledge(
@@ -123,4 +144,28 @@ data class Todo(
     val title: String,
     val type: Int,
     val userId: Int
+)
+
+data class ShareList(
+    val coinInfo: CoinInfo,
+    val shareArticles: ShareArticles
+)
+
+data class CoinInfo(
+    val coinCount: Int,
+    val level: Int,
+    val nickname: String,
+    val rank: String,
+    val userId: Int,
+    val username: String
+)
+
+data class ShareArticles(
+    val curPage: Int,
+    val datas: List<Article>,
+    val offset: Int,
+    val over: Boolean,
+    val pageCount: Int,
+    val size: Int,
+    val total: Int
 )

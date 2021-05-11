@@ -102,6 +102,22 @@ object ArticleRepository {
         return Listing(pagedList, refresh = { sourceFactory.source.value?.invalidate() })
     }
 
+
+    fun getShareListing(
+        pageSize: Int,
+        sourceFactory: ShareDataSourceFactory
+    ): Listing<Article> {
+        val pageList = LivePagedListBuilder(
+            sourceFactory,
+            PagedList.Config.Builder()
+                .setPageSize(pageSize)
+                .setInitialLoadSizeHint(pageSize * 2)
+                .setEnablePlaceholders(true)
+                .build()
+        ).build()
+        return Listing(pageList, refresh = { sourceFactory.source.value?.invalidate() })
+    }
+
     suspend fun getArticleList(page: Int): HttpResponse<ArticleList> {
         return withContext(Dispatchers.IO) { RetrofitManager.service.getArticles(page) }
 
@@ -186,6 +202,18 @@ object ArticleRepository {
     suspend fun getCollectArticles(page: Int): HttpResponse<ArticleList> {
         return withContext(Dispatchers.IO) {
             RetrofitManager.service.getCollectArticles(page)
+        }
+    }
+
+    suspend fun getMyShareList(page: Int): HttpResponse<ShareList> {
+        return withContext(Dispatchers.IO) {
+            RetrofitManager.service.getMyShareList(page)
+        }
+    }
+
+    suspend fun deleteShare(id: Int): HttpResponse<Any> {
+        return withContext(Dispatchers.IO) {
+            RetrofitManager.service.deleteShare(id)
         }
     }
 

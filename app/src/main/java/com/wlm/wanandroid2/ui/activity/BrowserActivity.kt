@@ -5,16 +5,21 @@ import android.os.Bundle
 import android.view.View
 import android.webkit.*
 import androidx.core.content.res.ResourcesCompat
+import androidx.lifecycle.lifecycleScope
 import com.orhanobut.logger.Logger
 import com.wlm.baselib.ui.BaseDBActivity
 import com.wlm.wanandroid2.R
 import com.wlm.wanandroid2.databinding.ActivityBrowserBinding
+import com.wlm.wanandroid2.db.History
+import com.wlm.wanandroid2.repository.DataBaseRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class BrowserActivity : BaseDBActivity<ActivityBrowserBinding>() {
 
     companion object {
         const val TAG = "BrowserActivity"
-        const val KEY_URL = "url"
+        const val KEY_HISTORY = "history"
     }
 
     override val layoutId = R.layout.activity_browser
@@ -49,13 +54,13 @@ class BrowserActivity : BaseDBActivity<ActivityBrowserBinding>() {
                 override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
                     super.onPageStarted(view, url, favicon)
                     mBinding.progressBar.visibility = View.VISIBLE
-                    Logger.d("onPageStarted")
+//                    Logger.d("onPageStarted")
                 }
 
                 override fun onPageFinished(view: WebView?, url: String?) {
                     super.onPageFinished(view, url)
                     mBinding.progressBar.visibility = View.GONE
-                    Logger.d("onPageFinished")
+//                    Logger.d("onPageFinished")
                 }
             }
 
@@ -64,12 +69,12 @@ class BrowserActivity : BaseDBActivity<ActivityBrowserBinding>() {
                 override fun onProgressChanged(view: WebView?, newProgress: Int) {
                     super.onProgressChanged(view, newProgress)
                     mBinding.progressBar.progress = newProgress
-                    Logger.d(newProgress.toString())
+//                    Logger.d(newProgress.toString())
                 }
 
                 override fun onReceivedTitle(view: WebView?, title: String?) {
                     super.onReceivedTitle(view, title)
-                    Logger.d("onReceivedTitle")
+//                    Logger.d("onReceivedTitle")
                     title?.let { mBinding.browserHeader.title = it }
                 }
             }
@@ -77,9 +82,19 @@ class BrowserActivity : BaseDBActivity<ActivityBrowserBinding>() {
     }
 
     private fun loadWebView() {
-        intent?.extras?.getString(KEY_URL)?.let {
-            Logger.d("URL: $it")
-            mBinding.webView.loadUrl(it)
+        (intent?.extras?.getSerializable(KEY_HISTORY) as History?)?.let {
+            Logger.d("URL: ${it.url}")
+
+            mBinding.webView.loadUrl(it.url)
+            lifecycleScope.launch(Dispatchers.IO) {
+                if (DataBaseRepository.historyDao.checkExist(it.visitUserId, it.id) > 0) {
+                    it.historyTime = System.currentTimeMillis()
+                    DataBaseRepository.historyDao.update(it)
+                } else {
+                    DataBaseRepository.historyDao.insert(it)
+                }
+            }
+
 //            webView.loadUrl("https://www.baidu.com")
         }
     }

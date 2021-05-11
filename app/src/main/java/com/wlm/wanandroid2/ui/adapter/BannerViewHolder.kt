@@ -44,7 +44,7 @@ class BannerViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
             setBannerStyle(BannerConfig.NUM_INDICATOR_TITLE)
             setDelayTime(3000)
             setOnBannerListener{ position ->
-                context.startKtxActivity<BrowserActivity>(value = BrowserActivity.KEY_URL to bannerUrls[position])
+                context.startKtxActivity<BrowserActivity>(value = BrowserActivity.KEY_HISTORY to bannerDatas!![position].createHistory())
             }
             start()
         }
